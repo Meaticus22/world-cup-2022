@@ -1,0 +1,50 @@
+<div class="graph-container">
+  <button mat-raised-button (click)="centerGraph()">Centrar</button>
+  <button mat-raised-button (click)="fitGraph()">Ajustar</button>
+  <ngx-graph
+    class="chart-container"
+    [showMiniMap]="false"
+    [links]="links"
+    [nodes]="nodes"
+    [center$]="center$"
+    [zoomToFit$]="zoomToFit$"
+    [draggingEnabled]="false"
+    [autoCenter]="true"
+  >
+    <!-- Node Template -->
+    <ng-template #nodeTemplate let-node>
+      <svg:g class="node">
+        <svg:foreignObject width="150" height="100">
+          <div class="node-content">
+            <mat-radio-group
+              aria-label="Select an option"
+              class="node-radio-group"
+              [(ngModel)]="node.data.winner"
+              (ngModelChange)="onWinnerChange(node)"
+              [disabled]="!node.data.teamA || !node.data.teamB"
+            >
+              <mat-radio-button [value]="node.data.teamA">{{
+                node.data.teamA || node.data.teamAPlaceholder
+              }}</mat-radio-button>
+
+              <mat-radio-button [value]="node.data.teamB">{{
+                node.data.teamB || node.data.teamBPlaceholder
+              }}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </svg:foreignObject>
+      </svg:g>
+    </ng-template>
+
+    <!-- Link Template -->
+    <ng-template #linkTemplate let-link>
+      <svg:g class="edge">
+        <svg:path
+          class="line"
+          stroke-width="2"
+          [attr.stroke]="link.data?.color"
+        ></svg:path>
+      </svg:g>
+    </ng-template>
+  </ngx-graph>
+</div>
