@@ -1,0 +1,45 @@
+:host {
+  height: calc(100%);
+  overflow: scroll;
+  display: flex;
+  // flex: 1;
+  min-width: 485px;
+  section.form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+
+    h3 {
+      margin-top: 2rem;
+      text-align: center;
+    }
+  }
+
+  .group-description {
+    display: flex;
+    flex-direction: column;
+
+    .chips-container {
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+
+      .flag {
+        padding-left: 5px;
+      }
+    }
+  }
+
+  .select-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+
+    .select-fields-container {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+}
