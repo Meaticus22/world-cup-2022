@@ -1,0 +1,57 @@
+<section class="form-container">
+  <h3>Selecciona el primer y segundo lugar del grupo</h3>
+  <ng-container *ngFor="let group of groups; index as i">
+    <div class="select-container">
+      <div class="group-description">
+        <p>Grupo {{ group.id }}</p>
+        <div class="chips-container">
+          <mat-chip-list *ngFor="let team of group.teams" aria-label="Teams">
+            <mat-chip>
+              <span>{{ team.name }}</span>
+              <span class="flag">{{ team.emojiFlag }}</span>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div class="select-fields-container">
+        <mat-form-field appearance="fill">
+          <mat-label>1er Lugar</mat-label>
+          <mat-select
+            #firstPlace
+            [(ngModel)]="group.firstPlace"
+            (ngModelChange)="onFirstPlaceChange($event, group)"
+            name="team"
+          >
+            <mat-option
+              *ngFor="let team of group.teams"
+              [value]="team.id"
+              [disabled]="team.id === secondPlace.value"
+            >
+              {{ team.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>2ndo Lugar</mat-label>
+          <mat-select
+            #secondPlace
+            [(ngModel)]="group.secondPlace"
+            (ngModelChange)="onSecondPlaceChange($event, group)"
+            name="team"
+          >
+            <mat-option
+              *ngFor="let team of group.teams"
+              [value]="team.id"
+              [disabled]="team.id === firstPlace.value"
+            >
+              {{ team.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+  </ng-container>
+</section>
